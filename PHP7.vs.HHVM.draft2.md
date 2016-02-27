@@ -1,0 +1,40 @@
+# PHP7 vs HHVM
+
+### How the rivalry began. 
+Back in 2010, Facebook announced that they had been working on a solution to the rising costs of running Facebook's servers.  Due to the resource demands of Facebook, they needed to develop a solution that would not require them to make substantial changes to their source code. This meant they would have to develop a method to optimize the performance of their source code in a substantial way.  	
+
+Their solution was "HipHop for PHP" (HPHPc), which translated the PHP codebase of  Facebook into heavily optimized C++, and then finally compiled by g++. The project's success was undeniable,- Facebook boasted that they were able to reduce CPU usage on their web servers by around 50%. This translated in Facebook seeing a significant reduction in overhead cost to running their servers.
+
+Because of this success, Facebook released the project as open source, and with the goal of showing the web community how easy it was to enhance website performance, without having to make any major changes to their codebase. Facebook developers often cite during presentations their reasoning behind developing the Hip Hop Platform was they felt that PHP's interpreter was not as optimized as it should be. More recently, Facebook developers have stated that major improvements have been achieved by the PHP team in optimizing their PHP interpreter.   
+	
+PHP's development team may have taken this criticism by Facebook to heart when they began development of PHP7, because  the end result of  PHP7's development (which began in 2014) resulted in significant performance upgrades when compared to PHP 5.X. They accomplished this by analyzing PHP's performance on popular platforms such as wordpress, drupal, and phpBB. By focusing on enhancing performance on these popular web platforms, the development team was able to make, small but numerous changes to the existing source code. After over a year of finding, improving, and testing these changes, they found they were able to considerably reduce the source code of PHP resulting in a faster, and more lightweight programming language.   
+The Goals and Features of HHVM 
+		
+After the success of HPHPc, Facebook decided to invest in developing HPHPc even further because of the substantial increase in performance, and reduction of resources necessary to run one of the internet's most highly trafficked websites . Their next step was to create a VM to execute the HPHPc code. 
+	
+HHVM is a virtual machine designed to execute programs which are written in PHP, or Facebook's own "Hack" programming language. It works by taking code written in PHP or hack, and converts that into untyped bytecode and metadata. Facebook accomplished this step by developing their own Abstract Syntax Tree to convert PHP and Hack into untyped bytecode which they call HipHopByteCode (HHBC). 
+HHVM then analyzes the HHBC using live type information, and converts it into a typed Intermediate Representation(IR). After this is accomplished, the typed IR is then further optimized and converted into x64 machine code.  Then HHVM executes the program off the x64 machine code.  
+Summary: PHP source--(parse)--> Abstract Syntax Tree--(emit)-->Bytecode--(analyze)--(intermediate representation)--(codegen)-->x64 machine code. 
+	
+It may be confusing to some as to why you would convert PHP code to C++ code, but Facebook has given some very strong reasons why converting to C++ is the best method to run their, or anyone else's, codebases. 
+They argue that C++ gives developers a much  needed balance between performance and maintainability. They support this claim by noting that C++ offers many convenient features such as: virtual methods, multiple inheritance, reinterpret_cast vs. dynamic_cast, plan old data vs. constructors/destructors, raw pointers vs. references vs. smart pointers, stack allocation vs. malloc vs.new, templates, and macros.  
+	
+Of those features, Facebook developers have explained the vital role of the following features which were particularly helpful to Facebook's codebase: Templates, X-macro technique, and unions and field size. One important thing to take away from these features is that you have to know what your byte code will look like at compile time, to be able to properly customize HHVM to optimize your code. 
+The Goals and Features of PHP 7
+	
+PHP 7's development team set out with one mission: make the internet faster. Since PHP is one of the most popular web development languages, they started research into their source code to see what they could do to improve its performance. The development team felt that this was the best strategy because it would result in a very simple upgrade process. Their end goal was to have any web site simply update to PHP7 on release, and see a substantial increase in performance without having to make any changes in their own code.  
+	
+PHPs 7' development team has been boasting that users can see performance doubled compared to PHP 5.x. They were able to accomplish this by making modifications to the source code, and lowering memory usage. They were also able to include an Abstract Syntax tree, to boost the performance of the PHP parser. They were also able to add into PHP 7 a secondary file-based cache for OPcache, which serves as a further augmentation of OPCache introduced in PHP 5.3.x.  Lastly they also included 2 new operators: the spaceship operator, and the null coalescing operator to help with comparison functions. 
+		-  
+
+### The major difference between HHVM and PHP 7
+
+Despite having the same goal of improving the speed and performance of executed PHP code, they both have vastly different ways of accomplishing this. The most noteworthy difference between the two is the  inclusion of a "Just in Time" (JIT) compiler in HHVM. Many people, including the development team of PHP 7, saw that HHVM outperformed PHP 7 in early benchmarks when comparing the two efforts.  PHP 7s development team attributed this performance gap to the inclusion of a "Just in Time" compiler in HHVM. PHP7's efforts focused solely on optimizing the source code of PHP, and during this time they were able to include an Abstract Syntax Tree in the source code for the language. With the inclusion of the AST, PHP7's development team has been able to setup the inclusion of a JIT compiler to be introduced to the programming language in a later version of PHP 7. Once a JIT compiler is introduced into PHP7, it should be able to significantly outperform HHVM in any non-Facebook application. 
+
+### What PHP7 and HHVM have in common
+
+Despite how competitive the two development teams are with each other at showing off benchmarks, it is important to remember that the userbase that will benefit the most from each language are on completely opposite ends of the web development spectrum. PHP is one of the oldest, and most popular, web development languages for many important reasons. Two of the chief reasons being: that it is easy to understand the basics of the language, and it is fast. They both share he same goal of improving PHP  performance. They both implement an AST, but HHVM's AST is specifically designed for Facebook/Hack.  
+
+###Who is the winner?
+	
+Despite the rivalry between PHP and Facebook's development teams, they both acknowledge that performance will widely vary from system to system. Because both projects are open source, they would like to hear as much feedback as possible from the community so they can further develop and optimize their code to be beneficial to all codebases. What's most important for anyone that is involved with a big php code base is that you now potentially have the ability to increase performance on your php code base with HHVM. If you mostly handle small websites that don't have the resource requirements of Facebook, the optimization and performance updates that PHP 7 brings will help enhance your users experience so your website will be able to run as fast as any large code base. 
